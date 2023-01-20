@@ -1,2 +1,1 @@
-# Example
-An example greeter plugin
+ToxicNPCs plugin shamelessly taken from Idyl

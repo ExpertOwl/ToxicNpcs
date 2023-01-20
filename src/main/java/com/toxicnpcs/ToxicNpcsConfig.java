@@ -16,4 +16,13 @@ public interface ToxicNpcsConfig extends Config {
 		return true;
 
 	}
+	@ConfigItem(
+			keyName = "toxicPlayers",
+			name = "Toxic Players",
+			description = "Players will be toxic when you die"
+	)
+	default boolean toxicPlayers() {
+		return true;
+
+	}
 }

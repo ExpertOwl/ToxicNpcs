@@ -28,27 +28,48 @@ public class ToxicNpcsPlugin extends Plugin
 	private ToxicNpcsConfig config;
 
 
-List<String> TOXIC_LINES = Arrays.asList(
-		"Not like this",
+List<String> TOXIC_NPC_LINES = Arrays.asList(
+		"gf",
 		"lol",
-		"L00L",
 		"?",
 		"????????",
-		"Sit"
+		"Sit",
+		"Back to Lumby",
+		"Yikes"
+);
+
+List<String> TOXIC_PLAYER_LINES = Arrays.asList(
+		"Why do I raid with you?",
+		"???",
+		"??????",
+		"This is 100% hunter's fault",
+		"Plank",
+		"EAT",
+		"OOF",
+		"F",
+		"k"
 );
 
 
 	@Subscribe
 	public void onActorDeath(ActorDeath e) {
 		if(e.getActor().equals(client.getLocalPlayer())) {
-			if(config.toxicNPCs()) {{
+			if(config.toxicNPCs()) {
 				client.getNpcs().forEach(npc -> {
-					int roll = (int) Math.floor(Math.random()*TOXIC_LINES.size());
-					npc.setOverheadText(TOXIC_LINES.get(roll));
+					int roll = (int) Math.floor(Math.random()*TOXIC_NPC_LINES.size());
+					npc.setOverheadText(TOXIC_NPC_LINES.get(roll));
 					npc.setOverheadCycle(600);
 				});
-			}}
-		}
+			}
+			if(config.toxicPlayers()) {
+				client.getPlayers().forEach(player -> {
+					if(!player.equals(client.getLocalPlayer())) {
+						int roll = (int) Math.floor(Math.random() * TOXIC_PLAYER_LINES.size());
+						player.setOverheadText(TOXIC_PLAYER_LINES.get(roll));
+						player.setOverheadCycle(600);
+					}
+				});
+		}}
 
 
 	}
